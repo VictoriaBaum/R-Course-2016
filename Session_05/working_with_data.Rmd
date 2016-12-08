@@ -53,10 +53,14 @@ v16 <- vector(mode = "numeric", 100)
 v17 <- seq_along(v16)
 v17
 
-
+```
 
 
 ```{r ordering, echo = TRUE}
+
+
+
+
 df2[order(df2$TokenFrequenz), ]
 ```
 
@@ -85,6 +89,7 @@ types <- vector('character')
 wortart <- vector('character')
 genus <- vector('character')
 
+
 xmlEventParse(
   "../data/t_990505_47.xml", 
   handlers = list(
@@ -93,6 +98,7 @@ xmlEventParse(
       types <<- c(types, attr['lemma'])
       wortart <<- c(wortart, attr['pos'])
       genus <<- c(genus, attr['morph'])
+
       ## morphology
       }
     ),
@@ -107,6 +113,7 @@ tokens <- unname(tokens)
 ## Aufgaben für selbstständige Arbeit
 
 * Einen Dataframe mit dem Wort, Lemma und Wortart anlegen.
+
 
 $t
 function (name, attr) 
@@ -137,4 +144,5 @@ sort(table(df1$genus))
 * Anzahl der autosemantischen Wörtern im Text berechnen.
 
 table(tokens%in%types)
+
 

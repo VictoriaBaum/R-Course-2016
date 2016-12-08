@@ -13,3 +13,12 @@ Datenstrukturen in R. Arbeit mit diversen Datenquellen.
 
 ## Sitzung 04
 Datenabfragen. Konflikte in Git.
+
+## Sitzung 05
+Arbeit mit XML-Daten. Auswahl der ignorierten Daten in Git.
+
+## Sitzung 06
+Deskriptive Statistiken. Graphische Darstellung nominaler Daten.
+
+## Sitzung 07
+Steuungswerte. Einführung in ggplot2.
