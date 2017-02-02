@@ -15,8 +15,14 @@ haben.
 
 ## Berechnungsformel f√ºr die Rangkorrelation
 $$
-  \rho = 1 - \frac{6\cdot \sum^N_{i=1} d_j^2}{N(N^2 - 1)}
+  \rho = 1 - \frac{6\cdot \sum^N_{i=1} d_i^2}{N(N^2 - 1)}
 $$
+#Rangliste A 1 7 5 1 3
+#"         B 2 3 4 0 15       Differenzen aufsummieren
+#Console: fast_food_data <- read.table(...Pfad.csv, header=T, sep = ',')
+#head(fast....)
+#str(fast_food_data)
+#table(fast_food_data$brand)
 
 ## Daten einlesen
 
@@ -49,6 +55,12 @@ plot(l <- fast.food.data$Locations, s <- fast.food.data$Sales,
 abline(lm(s ~ l))
 ```
 
+```{r}
+library(ggplot2)
+ggplot(data = fast.food.data, aes(x = Locations, y = Sales)) + geom_point() + geom_smooth(method = 'loess') + geom_smooth(method = 'lm', col = 'red')
+```
+
+
 ## Correlation
 ```{r cor}
 cor(fast.food.data$SalesRank, fast.food.data$LocationRank)
@@ -68,11 +80,41 @@ calculate.rho(fast.food.data$SalesRank, fast.food.data$LocationRank)
 ```
 
 
-## Aufgaben f√ºr selbstst√§ndige Arbeit
+## Aufgaben f¸r selbstst‰ndige Arbeit
 
-* ein Dataframe mit der jeweiligen Wortform, ihrer L√§nge in Buchstaben und der absoluten H√§ufigkeit erstellen;
-* die Ranglisten f√ºr die L√§nge und H√§ufigkeit berechnen;
-* die Rangkorrelation zwischen der H√§ufigkeit und der L√§nge bestimmen.
+* ein Dataframe mit der jeweiligen Wortform, ihrer L‰nge in Buchstaben und der absoluten H‰ufigkeit erstellen; 
+* die Ranglisten f¸r die L‰nge und H‰ufigkeit berechnen; (L‰nge: konkrete wˆrter, H: konkrete lemmata)
+* die Rangkorrelation zwischen der H√§ufigkeit und der L√§nge bestimmen. (Abh‰ngigkeit) 
+
+#1)
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r reading_XML, highlight = TRUE, results = 'hide', echo = TRUE, cache = TRUE}
+
+library(XML)
+library(plyr)
+
+lemma <- ('character')
+
+xmlEventParse(
+  "../data/t_990505_47.xml",
+  handlers = list(
+    't' = function(name, attr){
+      lemma <<- c(lemma, attr['lemma'])
+    }
+  ),
+  addContext = FALSE
+)
+
+lemma_length <- nchar(lemma)
+
+df_lemma <- data.frame(lemma)
+write.table(df_lemma, file = "df_lemma.csv", sep = '\t')
+df_frequency <- count(df_lemma, lemma)
+```
+
 
 ## Quellen
-Die Inhalte dieser √úbung basieren auf dem Kapitel 16 aus Pace L. _Beginning R: An Introduction in Statistical Programming._ Apress: 2012
+Die Inhalte dieser ‹bung basieren auf dem Kapitel 16 aus Pace L. _Beginning R: An Introduction in Statistical Programming._ Apress: 2012

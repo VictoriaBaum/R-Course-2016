@@ -7,6 +7,7 @@ library(XML)
 
 tokens <- vector('character')
 types <- vector('character')
+wortart <- vector('character')
 
 xmlEventParse(
   "../data/t_990505_47.xml", 
@@ -14,6 +15,7 @@ xmlEventParse(
     't' = function(name, attr) {
       tokens <<- c(tokens, attr['word'])
       types <<- c(types, attr['lemma'])
+      wortart <<- c(wortart, attr['pos'])
       ## morphology
       }
     ),
@@ -40,7 +42,7 @@ m = as.matrix(myDTM)
 sorted.matrix <- sort(rowSums(m), decreasing = TRUE)
 
 wordcloud(names(sorted.matrix), sorted.matrix, scale=c(4,0.5),
-          min.freq = 1, max.words = 20,
+          min.freq = 4, max.words = 45,
           colors = brewer.pal(8, "Dark2"))
 ```
 
@@ -91,7 +93,7 @@ pie(POS, main="Kuchendiagramm")
 pie3D(POS,
       main="POS-Verteilung",
       labels=names(POS),
-      explode=0.1
+      explode=0.5
       )
 ```
 ```{r combined_graphics}
@@ -130,3 +132,14 @@ pie3D(slices, explode=0.1, labels=names(slices))
 ## Aufgaben für selbstständige Arbeit
 
 * Aus dem vorhandenen Text Wortwolken mit jeweils nur Verben, Substantiven und grammatischen Wortformen erstellen.
+
+
+```{r wordcloud, highlight = TRUE, echo = TRUE, cache = TRUE}
+library(tm)
+library(wordcloud)
+
+par(mfrow=c(3,1))
+myCorpus = Corpus(VectorSource(tokens))
+
+```
+

@@ -26,6 +26,7 @@ $$
 ## Berechnung in R
 ```{r}
 choose(100,35)*choose(70,40) * 0.35^35 * 0.35^40 * 0.30^25  # choose(25, 25) = 1
+#35 aus 100, etc.
 ```
 
 
@@ -44,7 +45,8 @@ chi.squared
 ```
 
 ```{r}
-pchisq(chi.squared, df = 3 - 1, lower.tail = F)
+pchisq(chi.squared, df = 3 - 1, lower.tail = F) #rechts v. Graph interessant
+#df: letzte rechte Klammer
 ```
 
 ```{r}
@@ -53,10 +55,10 @@ chisq.test(x, p = p)
 
 
 ## Aufgaben
-- nehmen Sie zwei Texte im TigerXML-Format;
+- nehmen Sie zwei Texte im TigerXML-Format; (Wikipedia)
 - extrahieren Sie die ersten 100 Autosemantika;
-- teilen Sie diese Beobachtungen in A-, V- und N-Wörter auf,
-- vergleichen Sie die beiden Häufigkeitsverteilungen mit Hilfe von dem Chi-Quadrat-Test.
+- teilen Sie diese Beobachtungen in A-, V- und N-Wörter auf, (H�kchen setzen)
+- vergleichen Sie die beiden Häufigkeitsverteilungen mit Hilfe von dem Chi-Quadrat-Test. 4-/Mehr-Felder-Tabellen
 
 
 ## Quellen
