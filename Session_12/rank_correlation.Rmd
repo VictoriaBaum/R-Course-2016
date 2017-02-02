@@ -86,34 +86,7 @@ calculate.rho(fast.food.data$SalesRank, fast.food.data$LocationRank)
 * die Ranglisten für die Länge und Häufigkeit berechnen; (Länge: konkrete wörter, H: konkrete lemmata)
 * die Rangkorrelation zwischen der HÃ¤ufigkeit und der LÃ¤nge bestimmen. (Abhängigkeit) 
 
-#1)
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
 
-```{r reading_XML, highlight = TRUE, results = 'hide', echo = TRUE, cache = TRUE}
-
-library(XML)
-library(plyr)
-
-lemma <- ('character')
-
-xmlEventParse(
-  "../data/t_990505_47.xml",
-  handlers = list(
-    't' = function(name, attr){
-      lemma <<- c(lemma, attr['lemma'])
-    }
-  ),
-  addContext = FALSE
-)
-
-lemma_length <- nchar(lemma)
-
-df_lemma <- data.frame(lemma)
-write.table(df_lemma, file = "df_lemma.csv", sep = '\t')
-df_frequency <- count(df_lemma, lemma)
-```
 
 
 ## Quellen
